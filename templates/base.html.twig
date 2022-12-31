@@ -18,16 +18,30 @@
         {% endblock %}
     </head>
     <body>
-        {{ include('includes/_header.html.twig') }}
+        {{ include('_partials/_header.html.twig') }}
+        
+        {% if app.user %}
+            <div class="mb-3">
+                <p class="my-3 text-center">
+                    You are logged in as {{ app.user.userIdentifier }}
+                </p>
+
+                {% if app.user.is_verified == false %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                        <div class="alert-message">
+                            <strong>You account is not verified.</strong> Please check your emails or <a href="{{ path('app_resend_verif') }}">receive a new validation link</a>.
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+
+        {{ include('_partials/_flash.html.twig') }}
     
         <div class="container">
             {% block body %}{% endblock %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}
-                </div>
-            {% endif %}
         </div>
     </body>
 </html>

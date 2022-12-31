@@ -37,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
@@ -150,6 +153,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of is_verified
+     */
+    public function getIs_verified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    /**
+     * Set the value of is_verified
+     *
+     * @return  self
+     */
+    public function setIs_verified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
 
         return $this;
     }
