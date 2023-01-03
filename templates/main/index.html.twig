@@ -9,12 +9,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Welcome on BileMo API</h1>
 
-    This friendly message is coming from:
+    Access our API:
+
     <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Documents/formation/Projet_7/BileMo/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Documents/formation/Projet_7/BileMo/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
+    {% if app.user %}
+        <li>API documentation : <a href="{{ path('doc_api') }}">read</a></li>
+        <li>Your account : <a href="{{ path('app_user') }}">check</a></li>
+    {% else %}
+        <li>Registered user : <a href="{{ path('app_login') }}">sign in</a></li>
+        <li>Not yet registered : <a href="{{ path('app_register_index') }}">registration</a></li>
+    {% endif %}
     </ul>
 </div>
 {% endblock %}

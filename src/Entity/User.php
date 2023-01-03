@@ -34,11 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Customer::class, orphanRemoval: true)]
     private Collection $customers;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
+
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $website = null;
 
     public function __construct()
     {
@@ -173,6 +176,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIs_verified(bool $is_verified): self
     {
         $this->is_verified = $is_verified;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(string $website): self
+    {
+        $this->website = $website;
 
         return $this;
     }

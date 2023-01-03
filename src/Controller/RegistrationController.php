@@ -16,9 +16,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
+#[Route('/register', name: 'app_register_')]
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/', name: 'index')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager, SendMailService $mail, JWTService $jwt): Response
     {
         $user = new User();
@@ -74,7 +75,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify/{token}', name: 'app_verify')]
+    #[Route('/verify/{token}', name: 'verify')]
     public function verifyUser($token, JWTService $jwt, UserRepository $userRepository, EntityManagerInterface $em): Response
     {
         // check token not modified, not expired
@@ -91,16 +92,16 @@ class RegistrationController extends AbstractController
                 $em->flush($user);
 
                 $this->addFlash('success', 'User verified');
-                return $this->redirectToRoute('app_main');
+                return $this->redirectToRoute('app_user');
             }
         }
 
         // token issue
-        $this->addFlash('danger', 'Token not valided or expired');
+        $this->addFlash('danger', 'Invalid token or expired');
         return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/resend-verif', name: 'app_resend_verif')]
+    #[Route('/resend-verif', name: 'resend_verif')]
     public function resendVerif(JWTService $jwt, SendMailService $mail, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
@@ -112,7 +113,7 @@ class RegistrationController extends AbstractController
 
         if ($user->getIs_verified()) {
             $this->addFlash('warning', 'This user is already verified');
-            return $this->redirectToRoute('app_main');
+            return $this->redirectToRoute('app_login');
         }
 
         // the header
@@ -139,6 +140,6 @@ class RegistrationController extends AbstractController
         );
 
         $this->addFlash('success', 'Email sent');
-        return $this->redirectToRoute('app_main');
+        return $this->redirectToRoute('app_user');
     }
 }
