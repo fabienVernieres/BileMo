@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.14",
         "lexik/jwt-authentication-bundle": "^2.16",
         "sensio/framework-extra-bundle": "^6.2",
+        "symfony/asset": "6.2.*",
         "symfony/cache": "6.2.*",
         "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
@@ -27,7 +28,8 @@
         "symfony/validator": "6.2.*",
         "symfony/yaml": "6.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "willdurand/hateoas-bundle": "^2.5"
     },
     "config": {
         "allow-plugins": {
@@ -72,7 +74,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "6.2.*"
         }
     },

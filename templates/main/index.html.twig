@@ -3,24 +3,26 @@
 {% block title %}BileMo API{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="hero bg-image d-flex justify-content-center align-items-center"
+    style="
+      background-image: url('{{ asset('media/phone.jpg') }}');
+      height: 100vh;
+      background-size: cover;
+      ">
+    <div class="mask p-5 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.3);">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Welcome on BileMo API</h1>
 
-<div class="example-wrapper">
-    <h1>Welcome on BileMo API</h1>
-
-    Access our API:
-
-    <ul>
-    {% if app.user %}
-        <li>API documentation : <a href="{{ path('doc_api') }}">read</a></li>
-        <li>Your account : <a href="{{ path('app_user') }}">check</a></li>
-    {% else %}
-        <li>Registered user : <a href="{{ path('app_login') }}">sign in</a></li>
-        <li>Not yet registered : <a href="{{ path('app_register_index') }}">registration</a></li>
-    {% endif %}
-    </ul>
-</div>
+          {% if app.user %}
+            <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('doc_api') }}">API documentation</a>
+            <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_user') }}">Your account</a>
+          {% else %}
+            <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_login') }}">Sign in</a>
+            <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_register_index') }}">Registration</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

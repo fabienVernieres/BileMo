@@ -3,5 +3,523 @@
 {% block title %}API documentation{% endblock %}
 
 {% block body %}
-    <h1>API documentation</h1>
+<div class="container">
+    <h1 class="my-3">API documentation</h1>
+
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
+                    POST
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/login</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Get JWT token to login
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Request body</strong> (application/json)
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="p-3 bg-white">                
+                    <pre>
+{
+    "username" : "your email",
+    "password" : "your password"
+}
+                    </pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    200 (OK)
+                </td>
+                <td>
+                    <pre>
+{
+    "token": "zOTM1NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sI
+              mVtYWlsIjoidmVybmllcmVza0Bhb2wuY29tIn0
+              EIZO5R1FRQ7KK3f4iHgYSa3M09FoWRAzBtszHp
+              6Q4ZG9CRbNDi0zgUDuGSJ8_s22Jzt93TB5kaQk
+              2OniSuxCiWOVlw9avwU__Hl3R3pKd1RIKZAhcm
+              nMBkYDr41Msy0vzmDBwp1NUwKkf4n-kayrtRTb
+              VHR0ICjisZv2GEDBfN1NT-R8BjEfxXxOFx2tdW
+              eK1omVWl1O9L-XPOg7SuC9xXHzhIhSOaTQt44e
+              RGrFnylsZNmgR4s-9LMRj4qYIWXVCTsSpy1Yw0
+              iyDgDjegY51OsQlfCbLP9xo0zCFJSUzI1NiJ9
+              OiJKV1QiLCJhbGciOi1NTQsImV4cCI6MTY3Mjk
+              x84mEY7rYEpHWG7vWkl7duQvIr2X3EhGaCmGnN"
+}
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                    GET
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/products</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Get all products
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    200 (OK)
+                </td>
+                <td>
+                    <pre>
+[
+    {
+        "id": 301,
+        "name": "Animi quae velit.",
+        "description": "Blanditiis aut quas quis.",
+        "price": 1998.3,
+        "stock": 171,
+        "creationDate": "2022-12-27T16:39:17+00:00",
+        "brand": {
+            "id": 91,
+            "name": "Lind PLC",
+            "_links": {
+                "self": {
+                    "href": "/api/v1/products/91"
+                }
+            }
+        },
+        "ean": 8824413389789,
+        "_links": {
+            "self": {
+                "href": "/api/v1/product/301"
+            }
+        }
+    },
+    {
+        "id": 302,
+        "name": "Laudantium.",
+        "description": "Asperiores dolore...",
+        "price": 426.35,
+        "stock": 529,
+        "creationDate": "2022-12-27T16:39:17+00:00",
+        "brand": {
+            "id": 100,
+            "name": "Bechtelar Inc",
+            "_links": {
+                "self": {
+                    "href": "/api/v1/products/100"
+                }
+            }
+        },
+        "ean": 991491174182,
+        "_links": {
+            "self": {
+                "href": "/api/v1/product/302"
+            }
+        }
+    },
+    {
+        "id": 303,
+        "name": "Doloribus nobis et.",
+        "description": "Odit commodi itaque...",
+        "price": 1489.62,
+        "stock": 581,
+        "creationDate": "2022-12-27T16:39:17+00:00",
+        "brand": {
+            "id": 96,
+            "name": "Greenholt, Hyatt and Rodriguez",
+            "_links": {
+                "self": {
+                    "href": "/api/v1/products/96"
+                }
+            }
+        }, ...
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+        
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                    GET
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/product/{id}</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Get a product with its id number
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Parameters</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    Replace <span class="text-danger">{id}</span> with the desired product number
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    200 (OK)
+                </td>
+                <td>
+                    <pre>
+{
+    "id": 350,
+    "name": "Fuga molestias et.",
+    "description": "Ut consequuntur quis quibusdam...",
+    "price": 1796.45,
+    "stock": 589,
+    "creationDate": "2022-12-27T16:39:17+00:00",
+    "brand": {
+        "id": 99,
+        "name": "Hartmann PLC",
+        "_links": {
+            "self": {
+                "href": "/api/v1/products/99"
+            }
+        }
+    },
+    "ean": 3567927256974,
+    "_links": {
+        "self": {
+            "href": "/api/v1/product/350"
+        }
+    }
+}
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+        
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                    GET
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/customers</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Get all yours customers
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    200 (OK)
+                </td>
+                <td>
+                    <pre>
+[
+    {
+        "id": 7,
+        "lastname": "nom 5",
+        "firstname": "prénom 5",
+        "email": "email@5.com",
+        "creationDate": "2023-01-03T17:17:10+00:00",
+        "_links": {
+            "self": {
+                "href": "/api/v1/customer/7"
+            }
+        }
+    },
+    {
+        "id": 9,
+        "lastname": "nom 7",
+        "firstname": "prénom 7",
+        "email": "email@7.com",
+        "creationDate": "2023-01-03T17:17:31+00:00",
+        "_links": {
+            "self": {
+                "href": "/api/v1/customer/9"
+            }
+        }
+    }, ...
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+        
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                    GET
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/customer/{id}</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : See one of your clients in detail
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Parameters</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    Replace <span class="text-danger">{id}</span> with your customer's id number
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    200 (OK)
+                </td>
+                <td>
+                    <pre>
+{
+    "id": 9,
+    "lastname": "nom 7",
+    "firstname": "prénom 7",
+    "email": "email@7.com",
+    "creationDate": "2023-01-03T17:17:31+00:00",
+    "_links": {
+        "self": {
+            "href": "/api/v1/customer/9"
+        }
+    }
+}
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
+                    POST
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/customer</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Add a new customer
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Request body</strong> (application/json)
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="p-3 bg-white">                
+                    <pre>
+{
+    "lastname" : "Doe",
+    "firstname" : "john",
+    "email" : "johndoe@mail.com"
+}
+                    </pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    201 (created)
+                </td>
+                <td>
+                    <pre>
+{
+        "id": 7,
+        "lastname": "Doe",
+        "firstname": "john",
+        "email": "johndoe@mail.com",
+        "creationDate": "2023-01-03T17:17:10+00:00",
+        "_links": {
+            "self": {
+                "href": "/api/v1/customer/7"
+            }
+        }
+}
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+        
+        <table class="table table-bordered mb-3">
+            <tr>
+                <td class="bg-danger p-2 text-light fw-bold me-2 text-center w-25">
+                    DELETE
+                </td>
+                <td class="p-2 bg-secondary text-light">
+                    <strong>/api/v1/customer/{id}</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <strong>Description</strong> : Delete one of your customers
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Parameters</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    Replace <span class="text-danger">{id}</span> with your customer's id number
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="bg-light">
+                    <strong>Responses</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="bg-light fw-bold text-secondary">
+                    Code
+                </td>
+                <td class="bg-light fw-bold text-secondary">
+                    Details
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    204 (NO CONTENT)
+                </td>
+                <td>
+                    <pre>
+
+                    </pre>
+                </td>
+            </tr>     
+        </table>
+
+</div>
 {% endblock %}

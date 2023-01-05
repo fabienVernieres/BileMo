@@ -7,6 +7,8 @@ use App\Entity\User;
 use App\Entity\Customer;
 use App\Repository\UserRepository;
 use App\Repository\CustomerRepository;
+use JMS\Serializer\SerializerInterface;
+use JMS\Serializer\SerializationContext;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,8 +27,11 @@ class CustomerController extends AbstractController
     private $decodedJwtToken;
     private User $user;
     private CacheInterface $cache;
+    private mixed $context;
+    private SerializerInterface $serializer;
+    private CustomerRepository $customerRepository;
 
-    public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager, UserRepository $userRepository, CacheInterface $cache)
+    public function __construct(TokenStorageInterface $tokenStorageInterface, JWTTokenManagerInterface $jwtManager, UserRepository $userRepository, CacheInterface $cache, SerializerInterface $serializer, CustomerRepository $customerRepository)
     {
         $this->jwtManager = $jwtManager;
         $this->tokenStorageInterface = $tokenStorageInterface;
@@ -37,6 +42,9 @@ class CustomerController extends AbstractController
         ]);
 
         $this->cache = $cache;
+        $this->context = SerializationContext::create()->setGroups(['customers']);
+        $this->serializer = $serializer;
+        $this->customerRepository = $customerRepository;
     }
 
     #[Route('/v1/customer', name: 'customer_new', methods: ['POST'])]
@@ -65,7 +73,8 @@ class CustomerController extends AbstractController
         // delete the cache
         $this->cache->delete('customers_' . $this->user->getId());
 
-        return $this->json($customer, 201, [], ['groups' => 'customers']);
+        $customer = $this->serializer->serialize($customer, 'json', $this->context);
+        return new JsonResponse($customer, 201, [], true);
     }
 
 
@@ -75,10 +84,9 @@ class CustomerController extends AbstractController
      *
      * @param  Customer $id
      * @param  EntityManagerInterface $entityManager
-     * @param  CustomerRepository $customerRepository
      * @return JsonResponse
      */
-    public function delete(Customer $id, EntityManagerInterface $entityManager, CustomerRepository $customerRepository): JsonResponse
+    public function delete(Customer $id, EntityManagerInterface $entityManager): JsonResponse
     {
         if ($id->getUser() === $this->user) {
             $entityManager->remove($id);
@@ -89,10 +97,7 @@ class CustomerController extends AbstractController
         $this->cache->delete('customer_' . $id->getId());
         $this->cache->delete('customers_' . $this->user->getId());
 
-        return $this->json($customerRepository->findOneBy([
-            'id' => $id,
-            'user' => $this->user
-        ]), 204, [], ['groups' => 'customers']);
+        return $this->json(null, 204, [], ['groups' => 'customers']);
     }
 
 
@@ -100,18 +105,16 @@ class CustomerController extends AbstractController
     /**
      * getAll customers
      *
-     * @param  CustomerRepository $customerRepository
      * @return JsonResponse
      */
-    public function getAll(CustomerRepository $customerRepository): JsonResponse
+    public function getAll(): JsonResponse
     {
         // cache the request
-        $customers = $this->cache->get('customers_' . $this->user->getId(), function (ItemInterface $item) use ($customerRepository) {
+        $customers = $this->cache->get('customers_' . $this->user->getId(), function (ItemInterface $item) {
             $item->expiresAfter(3600);
-            return $customerRepository->findBy(['user' => $this->user]);
+            return $this->serializer->serialize($this->customerRepository->findBy(['user' => $this->user]), 'json', $this->context);
         });
-
-        return $this->json($customers, 200, [], ['groups' => 'customers']);
+        return new JsonResponse($customers, 200, [], true);
     }
 
     #[Route('/v1/customer/{id}', name: 'customer', methods: ['GET'])]
@@ -119,20 +122,19 @@ class CustomerController extends AbstractController
      * getOne customer by id
      *
      * @param  Customer $id
-     * @param  CustomerRepository $customerRepository
      * @return JsonResponse
      */
-    public function getOne(Customer $id, CustomerRepository $customerRepository): JsonResponse
+    public function getOne(Customer $id): JsonResponse
     {
         // cache the request
-        $customer = $this->cache->get('customer_' . $id->getId(), function (ItemInterface $item) use ($id, $customerRepository) {
+        $customer = $this->cache->get('customer_' . $id->getId(), function (ItemInterface $item) use ($id) {
             $item->expiresAfter(3600);
-            return $customerRepository->findOneBy([
+            return $this->serializer->serialize($this->customerRepository->findOneBy([
                 'id' => $id,
                 'user' => $this->user
-            ]);
+            ]), 'json', $this->context);
         });
 
-        return $this->json($customer, 200, [], ['groups' => 'customers']);
+        return new JsonResponse($customer, 200, [], true);
     }
 }

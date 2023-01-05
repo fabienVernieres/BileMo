@@ -5,44 +5,73 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_product",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups="products")
+ * )
+ *
+ */
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?float $price = null;
 
     #[ORM\Column]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?int $stock = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?Brand $brand = null;
 
     #[ORM\Column(type: "bigint")]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?int $ean = null;
 
     public function getId(): ?int

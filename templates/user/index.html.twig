@@ -3,12 +3,14 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-    <h1>{{ app.user.username }} account</h1>
+    <div class="container">
+        <h1 class="my-3">{{ app.user.username }} account</h1>
 
-    <ul class="mt-3">
-        <li>Your email : {{ app.user.email }}</li>
-        <li>Your website : {{ app.user.website }}</li>
+        <ul class="mt-3">
+            <li>Your email : {{ app.user.email }}</li>
+            <li>Your website : {{ app.user.website }}</li>
         
-        <li class="mt-3">API documentation : <a href="{{ path('doc_api') }}">read</a></li>
-    </ul>
+            <li class="mt-3">API documentation : <a href="{{ path('doc_api') }}">read</a></li>
+        </ul>
+    </div>
 {% endblock %}

@@ -5,31 +5,54 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_customer",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups="customers")
+ * )
+ *
+ */
 class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['customers'])]
+    /**
+     * @Groups({"customers"}) 
+     */
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['customers'])]
+    /**
+     * @Groups({"customers"}) 
+     */
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['customers'])]
+    /**
+     * @Groups({"customers"}) 
+     */
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Groups(['customers'])]
+    /**
+     * @Groups({"customers"}) 
+     */
     private ?string $email = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['customers'])]
+    /**
+     * @Groups({"customers"}) 
+     */
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]

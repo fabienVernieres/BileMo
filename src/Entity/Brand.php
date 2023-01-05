@@ -6,19 +6,36 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BrandRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation as Serializer;
+use Hateoas\Configuration\Annotation as Hateoas;
 
 #[ORM\Entity(repositoryClass: BrandRepository::class)]
+/**
+ * @Hateoas\Relation(
+ *      "self",
+ *      href = @Hateoas\Route(
+ *          "api_products_brand",
+ *          parameters = { "brand" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(groups="products")
+ * )
+ *
+ */
 class Brand
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['products'])]
+    /**
+     * @Groups({"products"}) 
+     */
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Product::class, orphanRemoval: true)]
