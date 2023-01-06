@@ -6,60 +6,65 @@
 <div class="container">
     <h1 class="my-3">API documentation</h1>
 
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
-                    POST
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/login</strong>
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
+                        POST
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/login</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Get JWT token to login
-                </td>
-            </tr>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2" class="w-100">
+                        <strong>Description</strong> : Get JWT token to login
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Request body</strong> (application/json)
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Request body</strong> (application/json)
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="p-3 bg-white">                
-                    <pre>
+                <tr>
+                    <td colspan="2" class="p-3 bg-white">                
+                        <pre>
 {
     "username" : "your email",
     "password" : "your password"
 }
-                    </pre>
-                </td>
-            </tr>
+                        </pre>
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    200 (OK)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td>
+                        200 (OK)
+                    </td>
+                    <td>
+                        <pre>
 {
     "token": "zOTM1NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sI
               mVtYWlsIjoidmVybmllcmVza0Bhb2wuY29tIn0
@@ -74,48 +79,56 @@
               OiJKV1QiLCJhbGciOi1NTQsImV4cCI6MTY3Mjk
               x84mEY7rYEpHWG7vWkl7duQvIr2X3EhGaCmGnN"
 }
-                    </pre>
-                </td>
-            </tr>     
-        </table>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
+        
 
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
-                    GET
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/products</strong>
-                </td>
-            </tr>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Get all products
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                        GET
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/products</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2">
+                        <strong>Description</strong> : Get all products
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    200 (OK)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        200 (OK)
+                    </td>
+                    <td>
+                        <pre>
 [
     {
         "id": 301,
@@ -179,60 +192,68 @@
                 }
             }
         }, ...
-                    </pre>
-                </td>
-            </tr>     
-        </table>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
+
         
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
-                    GET
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/product/{id}</strong>
-                </td>
-            </tr>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Get a product with its id number
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                        GET
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/product/{id}</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Parameters</strong>
-                </td>
-            </tr>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2">
+                        <strong>Description</strong> : Get a product with its id number
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2">
-                    Replace <span class="text-danger">{id}</span> with the desired product number
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Parameters</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2">
+                        Replace <span class="text-danger">{id}</span> with the desired product number
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    200 (OK)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        200 (OK)
+                    </td>
+                    <td>
+                        <pre>
 {
     "id": 350,
     "name": "Fuga molestias et.",
@@ -256,48 +277,56 @@
         }
     }
 }
-                    </pre>
-                </td>
-            </tr>     
-        </table>
-        
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
-                    GET
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/customers</strong>
-                </td>
-            </tr>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Get all yours customers
-                </td>
-            </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                        GET
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/customers</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td>
-                    200 (OK)
-                </td>
-                <td>
-                    <pre>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2">
+                        <strong>Description</strong> : Get all yours customers
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        200 (OK)
+                    </td>
+                    <td>
+                        <pre>
 [
     {
         "id": 7,
@@ -323,60 +352,68 @@
             }
         }
     }, ...
-                    </pre>
-                </td>
-            </tr>     
-        </table>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
+
+
         
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
-                    GET
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/customer/{id}</strong>
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-info p-2 text-light fw-bold me-2 text-center w-25">
+                        GET
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/customer/{id}</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : See one of your clients in detail
-                </td>
-            </tr>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                   <td colspan="2">
+                        <strong>Description</strong> : See one of your clients in detail
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Parameters</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Parameters</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2">
-                    Replace <span class="text-danger">{id}</span> with your customer's id number
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2">
+                        Replace <span class="text-danger">{id}</span> with your customer's id number
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    200 (OK)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td>
+                        200 (OK)
+                    </td>
+                    <td>
+                        <pre>
 {
     "id": 9,
     "lastname": "nom 7",
@@ -389,66 +426,74 @@
         }
     }
 }
-                    </pre>
-                </td>
-            </tr>     
-        </table>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
 
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
-                    POST
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/customer</strong>
-                </td>
-            </tr>
+        
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Add a new customer
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-success p-2 text-light fw-bold me-2 text-center w-25">
+                        POST
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/customer</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2">
+                        <strong>Description</strong> : Add a new customer
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Request body</strong> (application/json)
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Request body</strong> (application/json)
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="p-3 bg-white">                
-                    <pre>
+                <tr>
+                    <td colspan="2" class="p-3 bg-white">                
+                        <pre>
 {
     "lastname" : "Doe",
     "firstname" : "john",
     "email" : "johndoe@mail.com"
 }
-                    </pre>
-                </td>
-            </tr>
+                        </pre>
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    201 (created)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td>
+                        201 (created)
+                    </td>
+                    <td>
+                        <pre>
 {
         "id": 7,
         "lastname": "Doe",
@@ -461,65 +506,73 @@
             }
         }
 }
-                    </pre>
-                </td>
-            </tr>     
-        </table>
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
+
+
         
-        <table class="table table-bordered mb-3">
-            <tr>
-                <td class="bg-danger p-2 text-light fw-bold me-2 text-center w-25">
-                    DELETE
-                </td>
-                <td class="p-2 bg-secondary text-light">
-                    <strong>/api/v1/customer/{id}</strong>
-                </td>
-            </tr>
+        <div class="table-heading">
+            <table class="table table-bordered my-0">
+                <tr>
+                    <td class="bg-danger p-2 text-light fw-bold me-2 text-center w-25">
+                        DELETE
+                    </td>
+                    <td class="p-2 bg-secondary text-light">
+                        <strong>/api/v1/customer/{id}</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <tr>
-                <td colspan="2">
-                    <strong>Description</strong> : Delete one of your customers
-                </td>
-            </tr>
+        <div class="table-content">
+            <table class="table table-bordered mb-3">
+                <tr>
+                    <td colspan="2">
+                        <strong>Description</strong> : Delete one of your customers
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Parameters</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Parameters</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2">
-                    Replace <span class="text-danger">{id}</span> with your customer's id number
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2">
+                        Replace <span class="text-danger">{id}</span> with your customer's id number
+                    </td>
+                </tr>
 
-            <tr>
-                <td colspan="2" class="bg-light">
-                    <strong>Responses</strong>
-                </td>
-            </tr>
+                <tr>
+                    <td colspan="2" class="bg-light">
+                        <strong>Responses</strong>
+                    </td>
+                </tr>
 
-            <tr>
-                <td class="bg-light fw-bold text-secondary">
-                    Code
-                </td>
-                <td class="bg-light fw-bold text-secondary">
-                    Details
-                </td>
-            </tr>
+                <tr>
+                    <td class="bg-light fw-bold text-secondary w-25">
+                        Code
+                    </td>
+                    <td class="bg-light fw-bold text-secondary">
+                        Details
+                    </td>
+                </tr>
 
-            <tr>
-                <td>
-                    204 (NO CONTENT)
-                </td>
-                <td>
-                    <pre>
+                <tr>
+                    <td>
+                        204 (NO CONTENT)
+                    </td>
+                    <td>
+                        <pre>
 
-                    </pre>
-                </td>
-            </tr>     
-        </table>
-
+                        </pre>
+                    </td>
+                </tr>     
+            </table>
+        </div>
 </div>
 {% endblock %}

@@ -49,6 +49,12 @@ class JWTService
         return $jwt;
     }
 
+    /**
+     * is Valid
+     *
+     * @param  string $token
+     * @return bool
+     */
     public function isValid(string $token): bool
     {
         return preg_match(
@@ -57,6 +63,12 @@ class JWTService
         ) === 1;
     }
 
+    /**
+     * get Header
+     *
+     * @param  string $token
+     * @return array
+     */
     public function getHeader(string $token): array
     {
         // explode the token
@@ -68,6 +80,12 @@ class JWTService
         return $header;
     }
 
+    /**
+     * get Payload
+     *
+     * @param  string $token
+     * @return array
+     */
     public function getPayload(string $token): array
     {
         // explode the token
@@ -79,6 +97,12 @@ class JWTService
         return $payload;
     }
 
+    /**
+     * is Expired
+     *
+     * @param  string $token
+     * @return bool
+     */
     public function isExpired(string $token): bool
     {
         $payload = $this->getPayload($token);
@@ -88,6 +112,13 @@ class JWTService
         return $payload['exp'] < $now->getTimestamp();
     }
 
+    /**
+     * check the token
+     *
+     * @param  string $token
+     * @param  string $secret
+     * @return void
+     */
     public function check(string $token, string $secret)
     {
         // header and payload
