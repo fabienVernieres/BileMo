@@ -14,6 +14,11 @@ class SendMailService
         $this->mailer = $mailer;
     }
 
+    /**
+     * send mail
+     *
+     * @return void
+     */
     public function send(
         string $from,
         string $to,
