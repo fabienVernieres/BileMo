@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
 
             // send mail
             $mail->send(
-                'no-reply@bilemo.com',
+                'contact@bilemo.fabienvernieres.com',
                 $user->getEmail(),
                 'Activate your account',
                 'register',
@@ -132,7 +132,7 @@ class RegistrationController extends AbstractController
 
         // send mail
         $mail->send(
-            'no-reply@bilemo.com',
+            'contact@bilemo.fabienvernieres.com',
             $user->getEmail(),
             'Activate your account',
             'register',
