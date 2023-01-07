@@ -21,6 +21,7 @@ jobs:
         run: |
           touch .env.local
           echo "${{ secrets.local }}" > .env.local
+          php bin/console lexik:jwt:generate-keypair
 
       - name: 📂 Sync Files
         uses: SamKirkland/web-deploy@v1

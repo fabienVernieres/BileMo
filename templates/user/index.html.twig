@@ -3,14 +3,36 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="my-3">{{ app.user.username }} account</h1>
+    <div class="container py-5 h-100">
+        <div class="border border-1 px-4 py-1 rounded card">
+                <h1 class="my-3">Your account</h1>
 
-        <ul class="mt-3">
-            <li>Your email : {{ app.user.email }}</li>
-            <li>Your website : {{ app.user.website }}</li>
-        
-            <li class="mt-3">API documentation : <a href="{{ path('doc_api') }}">read</a></li>
-        </ul>
+                <h6>Information</h6>
+
+                <hr class="mt-0 mb-4">
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                        <h6>Username</h6>
+                        <p class="text-muted">{{ app.user.username }}</p>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <h6>Email</h6>
+                        <p class="text-muted">{{ app.user.email }}</p>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <h6>Website</h6>
+                        <p class="text-muted">{{ app.user.website }}</p>
+                    </div>
+                </div>
+
+                {% if app.user.is_verified %}
+                    <h6>API documentation</h6>
+                    <hr class="mt-0 mb-4">
+                    <p class="text-muted">How to use our API : <a href="{{ path('doc_api') }}">read</a></p>
+                {% endif %}
+        </div>
     </div>
 {% endblock %}

@@ -11,16 +11,19 @@
       ">
     <div class="mask p-5 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.3);">
       <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
+        <div class="text-white ">
           <h1 class="mb-3">Welcome on BileMo API</h1>
-
+          <div class="d-flex justify-content-center align-items-center">
           {% if app.user %}
-            <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('doc_api') }}">API documentation</a>
+            {% if app.user.is_verified %}
+              <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('doc_api') }}">API documentation</a>
+            {% endif %}
             <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_user') }}">Your account</a>
           {% else %}
             <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_login') }}">Sign in</a>
             <a class="btn btn-outline-light btn-lg m-2" role="button" href="{{ path('app_register_index') }}">Registration</a>
           {% endif %}
+          </div>
         </div>
       </div>
     </div>
