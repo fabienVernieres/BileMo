@@ -89,6 +89,7 @@ class RegistrationController extends AbstractController
             // check if user exist and is not verified
             if ($user && !$user->getIs_verified()) {
                 $user->setIs_verified(true);
+                $user->setRoles(['ROLE_USER_API']);
                 $em->flush($user);
 
                 $this->addFlash('success', 'User verified');
