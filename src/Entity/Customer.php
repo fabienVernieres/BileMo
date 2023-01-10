@@ -59,16 +59,32 @@ class Customer
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    /**
+     * get customer Id
+     *
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * get customer Lastname
+     *
+     * @return string
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * set customer Lastname
+     *
+     * @param  mixed $lastname
+     * @return self
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
@@ -76,11 +92,22 @@ class Customer
         return $this;
     }
 
+    /**
+     * get customer Firstname
+     *
+     * @return string
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * set customer Firstname
+     *
+     * @param  mixed $firstname
+     * @return self
+     */
     public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
@@ -88,11 +115,22 @@ class Customer
         return $this;
     }
 
+    /**
+     * get customer Email
+     *
+     * @return string
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * set customer Email
+     *
+     * @param  mixed $email
+     * @return self
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -100,11 +138,22 @@ class Customer
         return $this;
     }
 
+    /**
+     * get customer Creation Date
+     *
+     * @return DateTimeInterface
+     */
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
     }
 
+    /**
+     * set customer Creation Date
+     *
+     * @param  mixed $creationDate
+     * @return self
+     */
     public function setCreationDate(\DateTimeInterface $creationDate): self
     {
         $this->creationDate = $creationDate;
@@ -112,11 +161,22 @@ class Customer
         return $this;
     }
 
+    /**
+     * get user from client
+     *
+     * @return User
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * set user from client
+     *
+     * @param  mixed $user
+     * @return self
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Brand;
 use App\Entity\Product;
@@ -31,7 +31,7 @@ class ProductController extends AbstractController
 
     #[Route('/v1/products', name: 'products', methods: ['GET'])]
     /**
-     * getAll products
+     * get All products
      *
      * @return JsonResponse
      */
@@ -43,12 +43,13 @@ class ProductController extends AbstractController
             return $this->serializer->serialize($this->productRepository->findAll(), 'json', $this->context);
         });
 
+        // return OK response with the list of products
         return new JsonResponse($products, 200, [], true);
     }
 
     #[Route('/v1/product/{id}', name: 'product', methods: ['GET'])]
     /**
-     * getOne product by id
+     * get a product by id
      *
      * @param  Product $id
      * @return JsonResponse
@@ -61,12 +62,13 @@ class ProductController extends AbstractController
             return $this->serializer->serialize($this->productRepository->find($id), 'json', $this->context);
         });
 
+        // return OK response with the product sheet
         return new JsonResponse($product, 200, [], true);
     }
 
     #[Route('/v1/products/{brand}', name: 'products_brand', methods: ['GET'])]
     /**
-     * brand all products
+     * list of brand products
      *
      * @param  Brand $brand
      * @return JsonResponse
@@ -78,6 +80,8 @@ class ProductController extends AbstractController
             $item->expiresAfter(3600);
             return $this->serializer->serialize($this->productRepository->findBy(['brand' => $brand]), 'json', $this->context);
         });
+
+        // return OK response with the list of brand products
         return new JsonResponse($products_brand, 200, [], true);
     }
 }

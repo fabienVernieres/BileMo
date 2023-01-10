@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use DateTime;
 use App\Entity\User;
@@ -37,11 +37,14 @@ class CustomerController extends AbstractController
         $this->tokenStorageInterface = $tokenStorageInterface;
         $this->decodedJwtToken = $this->jwtManager->decode($this->tokenStorageInterface->getToken());
 
+        // the current user
         $this->user = $userRepository->findOneBy([
             'email' => $this->decodedJwtToken['email']
         ]);
 
+        // the cache
         $this->cache = $cache;
+
         $this->context = SerializationContext::create()->setGroups(['customers']);
         $this->serializer = $serializer;
         $this->customerRepository = $customerRepository;
@@ -49,13 +52,14 @@ class CustomerController extends AbstractController
 
     #[Route('/v1/customer', name: 'customer_new', methods: ['POST'])]
     /**
-     * Add customer
+     * Add a customer
      *
      * @param  EntityManagerInterface $entityManager
      * @return JsonResponse
      */
     public function new(EntityManagerInterface $entityManager): JsonResponse
     {
+        // create a new customer object
         $customer = new Customer();
 
         $request = new Request($_POST);
@@ -73,6 +77,7 @@ class CustomerController extends AbstractController
         // delete the cache
         $this->cache->delete('customers_' . $this->user->getId());
 
+        // return created response with the object
         $customer = $this->serializer->serialize($customer, 'json', $this->context);
         return new JsonResponse($customer, 201, [], true);
     }
@@ -80,7 +85,7 @@ class CustomerController extends AbstractController
 
     #[Route('/v1/customer/{id}', name: 'customer_delete', methods: ['DELETE'])]
     /**
-     * delete customer
+     * delete a customer
      *
      * @param  Customer $id
      * @param  EntityManagerInterface $entityManager
@@ -88,6 +93,7 @@ class CustomerController extends AbstractController
      */
     public function delete(Customer $id, EntityManagerInterface $entityManager): JsonResponse
     {
+        // remove the user
         if ($id->getUser() === $this->user) {
             $entityManager->remove($id);
             $entityManager->flush();
@@ -97,13 +103,16 @@ class CustomerController extends AbstractController
         $this->cache->delete('customer_' . $id->getId());
         $this->cache->delete('customers_' . $this->user->getId());
 
-        return $this->json(null, 204, [], ['groups' => 'customers']);
+        $message = "Customer successfully deleted";
+
+        // return no content response
+        return new JsonResponse($message, 200, [], true);
     }
 
 
     #[Route('/v1/customers', name: 'customers', methods: ['GET'])]
     /**
-     * getAll customers
+     * get all of the user's clients
      *
      * @return JsonResponse
      */
@@ -114,12 +123,14 @@ class CustomerController extends AbstractController
             $item->expiresAfter(3600);
             return $this->serializer->serialize($this->customerRepository->findBy(['user' => $this->user]), 'json', $this->context);
         });
+
+        // return OK response with the list of customers
         return new JsonResponse($customers, 200, [], true);
     }
 
     #[Route('/v1/customer/{id}', name: 'customer', methods: ['GET'])]
     /**
-     * getOne customer by id
+     * get user client by id
      *
      * @param  Customer $id
      * @return JsonResponse
@@ -135,6 +146,7 @@ class CustomerController extends AbstractController
             ]), 'json', $this->context);
         });
 
+        // return OK response with the customer file
         return new JsonResponse($customer, 200, [], true);
     }
 }

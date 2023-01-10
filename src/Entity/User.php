@@ -50,16 +50,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->customers = new ArrayCollection();
     }
 
+    /**
+     * get user Id
+     *
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * get user Email
+     *
+     * @return string
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * set user Email
+     *
+     * @param  mixed $email
+     * @return self
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -89,6 +105,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * set user Roles
+     *
+     * @param  mixed $roles
+     * @return self
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -104,6 +126,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
+    /**
+     * set user Password
+     *
+     * @param  mixed $password
+     * @return self
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -121,6 +149,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * get user clients
+     * 
      * @return Collection<int, Customer>
      */
     public function getCustomers(): Collection
@@ -128,6 +158,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->customers;
     }
 
+    /**
+     * add Customer to user
+     *
+     * @param  mixed $customer
+     * @return self
+     */
     public function addCustomer(Customer $customer): self
     {
         if (!$this->customers->contains($customer)) {
@@ -138,6 +174,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * remove Customer to user
+     *
+     * @param  mixed $customer
+     * @return self
+     */
     public function removeCustomer(Customer $customer): self
     {
         if ($this->customers->removeElement($customer)) {
@@ -150,11 +192,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * get Username
+     *
+     * @return string
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * set Username
+     *
+     * @param  mixed $username
+     * @return self
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -182,11 +235,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * get user Website
+     *
+     * @return string
+     */
     public function getWebsite(): ?string
     {
         return $this->website;
     }
 
+    /**
+     * set user Website
+     *
+     * @param  mixed $website
+     * @return self
+     */
     public function setWebsite(string $website): self
     {
         $this->website = $website;
