@@ -46,16 +46,32 @@ class Brand
         $this->products = new ArrayCollection();
     }
 
+    /**
+     * get brand Id
+     *
+     * @return int
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * get brand name
+     *
+     * @return string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * set brand name
+     *
+     * @param  mixed $name
+     * @return self
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -64,6 +80,8 @@ class Brand
     }
 
     /**
+     * get all brand products
+     * 
      * @return Collection<int, Product>
      */
     public function getProducts(): Collection
@@ -71,6 +89,12 @@ class Brand
         return $this->products;
     }
 
+    /**
+     * add a product to the brand
+     *
+     * @param  mixed $product
+     * @return self
+     */
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -81,6 +105,12 @@ class Brand
         return $this;
     }
 
+    /**
+     * remove a product to the brand
+     *
+     * @param  mixed $product
+     * @return self
+     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {

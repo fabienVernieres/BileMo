@@ -50,7 +50,7 @@ class JWTService
     }
 
     /**
-     * is Valid
+     * is the token valid
      *
      * @param  string $token
      * @return bool
@@ -64,7 +64,7 @@ class JWTService
     }
 
     /**
-     * get Header
+     * get token Header
      *
      * @param  string $token
      * @return array
@@ -81,7 +81,7 @@ class JWTService
     }
 
     /**
-     * get Payload
+     * get token Payload
      *
      * @param  string $token
      * @return array
@@ -98,7 +98,7 @@ class JWTService
     }
 
     /**
-     * is Expired
+     * is the token Expired
      *
      * @param  string $token
      * @return bool

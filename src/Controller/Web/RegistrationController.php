@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Web;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -20,8 +20,28 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator, EntityManagerInterface $entityManager, SendMailService $mail, JWTService $jwt): Response
-    {
+    /**
+     * user registration
+     *
+     * @param  Request $request
+     * @param  UserPasswordHasherInterface $userPasswordHasher
+     * @param  UserAuthenticatorInterface $userAuthenticator
+     * @param  AppCustomAuthenticator $authenticator
+     * @param  EntityManagerInterface $entityManager
+     * @param  SendMailService $mail
+     * @param  JWTService $jwt
+     * @return Response
+     */
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        UserAuthenticatorInterface $userAuthenticator,
+        AppCustomAuthenticator $authenticator,
+        EntityManagerInterface $entityManager,
+        SendMailService $mail,
+        JWTService $jwt
+    ): Response {
+        // create user object
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -76,8 +96,21 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/{token}', name: 'verify')]
-    public function verifyUser($token, JWTService $jwt, UserRepository $userRepository, EntityManagerInterface $em): Response
-    {
+    /**
+     * verify the token and valid the user
+     *
+     * @param  mixed $token
+     * @param  JWTService $jwt
+     * @param  UserRepository $userRepository
+     * @param  EntityManagerInterface $em
+     * @return Response
+     */
+    public function verifyUser(
+        $token,
+        JWTService $jwt,
+        UserRepository $userRepository,
+        EntityManagerInterface $em
+    ): Response {
         // check token not modified, not expired
         if ($jwt->isValid($token) && !$jwt->isExpired($token) && $jwt->check($token, $this->getParameter('app.jwtsecret'))) {
             // get the payload
@@ -103,8 +136,20 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/resend-verif', name: 'resend_verif')]
-    public function resendVerif(JWTService $jwt, SendMailService $mail, UserRepository $userRepository): Response
-    {
+    /**
+     * resend a validation link
+     *
+     * @param  JWTService $jwt
+     * @param  SendMailService $mail
+     * @param  UserRepository $userRepository
+     * @return Response
+     */
+    public function resendVerif(
+        JWTService $jwt,
+        SendMailService $mail,
+        UserRepository $userRepository
+    ): Response {
+        // the current user
         $user = $this->getUser();
 
         if (!$user) {
@@ -140,6 +185,7 @@ class RegistrationController extends AbstractController
             compact('user', 'token')
         );
 
+        // confirmation message and redirection to user area
         $this->addFlash('success', 'Email sent');
         return $this->redirectToRoute('app_user');
     }
