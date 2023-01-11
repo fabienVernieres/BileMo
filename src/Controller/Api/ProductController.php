@@ -38,10 +38,13 @@ class ProductController extends AbstractController
     public function getAll(): JsonResponse
     {
         // cache the request
-        $products = $this->cache->get('products', function (ItemInterface $item) {
-            $item->expiresAfter(3600);
-            return $this->serializer->serialize($this->productRepository->findAll(), 'json', $this->context);
-        });
+        $products = $this->cache->get(
+            'products',
+            function (ItemInterface $item) {
+                $item->expiresAfter(3600);
+                return $this->serializer->serialize($this->productRepository->findAll(), 'json', $this->context);
+            }
+        );
 
         // return OK response with the list of products
         return new JsonResponse($products, 200, [], true);
@@ -57,10 +60,13 @@ class ProductController extends AbstractController
     public function getOne(Product $id): JsonResponse
     {
         // cache the request
-        $product = $this->cache->get('product_' . $id->getId(), function (ItemInterface $item) use ($id) {
-            $item->expiresAfter(3600);
-            return $this->serializer->serialize($this->productRepository->find($id), 'json', $this->context);
-        });
+        $product = $this->cache->get(
+            'product_' . $id->getId(),
+            function (ItemInterface $item) use ($id) {
+                $item->expiresAfter(3600);
+                return $this->serializer->serialize($this->productRepository->find($id), 'json', $this->context);
+            }
+        );
 
         // return OK response with the product sheet
         return new JsonResponse($product, 200, [], true);
@@ -76,10 +82,13 @@ class ProductController extends AbstractController
     public function brand(Brand $brand): JsonResponse
     {
         // cache the request
-        $products_brand = $this->cache->get('products_brand_' . $brand->getId(), function (ItemInterface $item) use ($brand) {
-            $item->expiresAfter(3600);
-            return $this->serializer->serialize($this->productRepository->findBy(['brand' => $brand]), 'json', $this->context);
-        });
+        $products_brand = $this->cache->get(
+            'products_brand_' . $brand->getId(),
+            function (ItemInterface $item) use ($brand) {
+                $item->expiresAfter(3600);
+                return $this->serializer->serialize($this->productRepository->findBy(['brand' => $brand]), 'json', $this->context);
+            }
+        );
 
         // return OK response with the list of brand products
         return new JsonResponse($products_brand, 200, [], true);

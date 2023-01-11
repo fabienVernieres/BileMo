@@ -28,13 +28,13 @@ class Brand
     #[ORM\GeneratedValue]
     #[ORM\Column]
     /**
-     * @Groups({"products"}) 
+     * @Groups({"products"})
      */
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     /**
-     * @Groups({"products"}) 
+     * @Groups({"products"})
      */
     private ?string $name = null;
 
@@ -81,7 +81,7 @@ class Brand
 
     /**
      * get all brand products
-     * 
+     *
      * @return Collection<int, Product>
      */
     public function getProducts(): Collection
@@ -114,7 +114,7 @@ class Brand
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
+            // Set the owning side to null (unless already changed)
             if ($product->getBrand() === $this) {
                 $product->setBrand(null);
             }

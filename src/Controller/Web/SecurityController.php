@@ -11,7 +11,7 @@ class SecurityController extends AbstractController
 {
     #[Route(path: '/api/login', name: 'app_api_login', methods: ['POST'])]
     /**
-     * get api token
+     * Get api token
      *
      * @param  mixed $authenticationUtils
      * @return void
@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
 
     #[Route(path: '/login', name: 'app_login')]
     /**
-     * login to user account
+     * Login to user account
      *
      * @param  mixed $authenticationUtils
      * @return Response
@@ -33,9 +33,9 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_user');
         }
 
-        // get the login error if there is one
+        // Get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -43,7 +43,7 @@ class SecurityController extends AbstractController
 
     #[Route(path: '/logout', name: 'app_logout')]
     /**
-     * log out current user
+     * Log out current user
      *
      * @return void
      */

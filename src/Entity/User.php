@@ -150,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * get user clients
-     * 
+     *
      * @return Collection<int, Customer>
      */
     public function getCustomers(): Collection
