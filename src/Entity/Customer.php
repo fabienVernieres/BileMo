@@ -27,31 +27,31 @@ class Customer
     #[ORM\GeneratedValue]
     #[ORM\Column]
     /**
-     * @Groups({"customers"}) 
+     * @Groups({"customers"})
      */
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     /**
-     * @Groups({"customers"}) 
+     * @Groups({"customers"})
      */
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     /**
-     * @Groups({"customers"}) 
+     * @Groups({"customers"})
      */
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, unique: true)]
     /**
-     * @Groups({"customers"}) 
+     * @Groups({"customers"})
      */
     private ?string $email = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     /**
-     * @Groups({"customers"}) 
+     * @Groups({"customers"})
      */
     private ?\DateTimeInterface $creationDate = null;
 
