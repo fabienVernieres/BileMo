@@ -56,7 +56,7 @@ class CustomerController extends AbstractController
         $this->customerRepository = $customerRepository;
     }
 
-    #[Route('/v1/customer', name: 'customer_new', methods: ['POST'])]
+    #[Route('/v1/customers', name: 'customer_new', methods: ['POST'])]
     /**
      * Add a customer
      *
@@ -89,7 +89,7 @@ class CustomerController extends AbstractController
     }
 
 
-    #[Route('/v1/customer/{id}', name: 'customer_delete', methods: ['DELETE'])]
+    #[Route('/v1/customers/{id}', name: 'customer_delete', methods: ['DELETE'])]
     /**
      * Delete a customer
      *
@@ -134,7 +134,7 @@ class CustomerController extends AbstractController
         return new JsonResponse($customers, 200, [], true);
     }
 
-    #[Route('/v1/customer/{id}', name: 'customer', methods: ['GET'])]
+    #[Route('/v1/customers/{id}', name: 'customer', methods: ['GET'])]
     /**
      * Get user client by id
      *
