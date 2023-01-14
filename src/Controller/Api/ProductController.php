@@ -50,7 +50,7 @@ class ProductController extends AbstractController
         return new JsonResponse($products, 200, [], true);
     }
 
-    #[Route('/v1/product/{id}', name: 'product', methods: ['GET'])]
+    #[Route('/v1/products/{id}', name: 'product', methods: ['GET'])]
     /**
      * get a product by id
      *
@@ -72,7 +72,7 @@ class ProductController extends AbstractController
         return new JsonResponse($product, 200, [], true);
     }
 
-    #[Route('/v1/products/{brand}', name: 'products_brand', methods: ['GET'])]
+    #[Route('/v1/products/brands/{brand}', name: 'products_brand', methods: ['GET'])]
     /**
      * list of brand products
      *
