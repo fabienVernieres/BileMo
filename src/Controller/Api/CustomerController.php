@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Customer;
 use App\Repository\UserRepository;
 use App\Repository\CustomerRepository;
+use App\Service\PaginationService;
 use JMS\Serializer\SerializerInterface;
 use JMS\Serializer\SerializationContext;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,7 @@ class CustomerController extends AbstractController
     private mixed $context;
     private SerializerInterface $serializer;
     private CustomerRepository $customerRepository;
+    private PaginationService $pagination;
 
     public function __construct(
         TokenStorageInterface $tokenStorageInterface,
@@ -37,7 +39,8 @@ class CustomerController extends AbstractController
         UserRepository $userRepository,
         CacheInterface $cache,
         SerializerInterface $serializer,
-        CustomerRepository $customerRepository
+        CustomerRepository $customerRepository,
+        PaginationService $pagination
     ) {
         $this->jwtManager = $jwtManager;
         $this->tokenStorageInterface = $tokenStorageInterface;
@@ -54,6 +57,7 @@ class CustomerController extends AbstractController
         $this->context = SerializationContext::create()->setGroups(['customers']);
         $this->serializer = $serializer;
         $this->customerRepository = $customerRepository;
+        $this->pagination = $pagination;
     }
 
     #[Route('/v1/customers', name: 'customer_new', methods: ['POST'])]
@@ -109,10 +113,8 @@ class CustomerController extends AbstractController
         $this->cache->delete('customer_' . $id->getId());
         $this->cache->delete('customers_' . $this->user->getId());
 
-        $message = "Customer successfully deleted";
-
         // Return no content response
-        return new JsonResponse($message, 200, [], true);
+        return new JsonResponse(null, 204, [], false);
     }
 
 
@@ -120,15 +122,27 @@ class CustomerController extends AbstractController
     /**
      * Get all of the user's clients
      *
+     * @param  Request $request
      * @return JsonResponse
      */
-    public function getAll(): JsonResponse
+    public function getAll(Request $request): JsonResponse
     {
+        // Current page
+        $currentPage = $request->get('page', 1);
+        $customersPerPage = 10;
+
         // Cache the request
-        $customers = $this->cache->get('customers_' . $this->user->getId(), function (ItemInterface $item) {
-            $item->expiresAfter(3600);
-            return $this->serializer->serialize($this->customerRepository->findBy(['user' => $this->user]), 'json', $this->context);
-        });
+        $customers = $this->cache->get(
+            'customers_' . $this->user->getId() . '_' . $currentPage,
+            function (ItemInterface $item) use ($currentPage, $customersPerPage) {
+                $item->expiresAfter(3600);
+                $customers = $this->customerRepository->findAllWithPagination($currentPage, $customersPerPage, $this->user);
+                $pagination = $this->pagination->pagination('customers', $customersPerPage, $this->customerRepository->count(['user' => $this->user]));
+                $customersWithPagination = array_merge($customers, $pagination);
+
+                return $this->serializer->serialize($customersWithPagination, 'json', $this->context);
+            }
+        );
 
         // Return OK response with the list of customers
         return new JsonResponse($customers, 200, [], true);
@@ -138,13 +152,13 @@ class CustomerController extends AbstractController
     /**
      * Get user client by id
      *
-     * @param  Customer $id
+     * @param  int $id
      * @return JsonResponse
      */
-    public function getOne(Customer $id): JsonResponse
+    public function getOne(int $id): JsonResponse
     {
         // Cache the request
-        $customer = $this->cache->get('customer_' . $id->getId(), function (ItemInterface $item) use ($id) {
+        $customer = $this->cache->get('customer_' . $id, function (ItemInterface $item) use ($id) {
             $item->expiresAfter(3600);
             return $this->serializer->serialize($this->customerRepository->findOneBy([
                 'id' => $id,
