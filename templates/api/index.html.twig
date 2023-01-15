@@ -298,7 +298,7 @@
                         GET
                     </td>
                     <td class="p-2 bg-secondary text-light">
-                        <strong>/api/v1/customers</strong>
+                        <strong>/api/v1/users</strong>
                     </td>
                 </tr>
             </table>
@@ -308,7 +308,7 @@
             <table class="table table-bordered mb-3">
                 <tr>
                     <td colspan="2">
-                        <strong>Description</strong> : Get all yours customers
+                        <strong>Description</strong> : Get all yours users
                     </td>
                 </tr>
 
@@ -342,7 +342,7 @@
         "creationDate": "2023-01-03T17:17:10+00:00",
         "_links": {
             "self": {
-                "href": "/api/v1/customers/7"
+                "href": "/api/v1/users/7"
             }
         }
     },
@@ -354,7 +354,7 @@
         "creationDate": "2023-01-03T17:17:31+00:00",
         "_links": {
             "self": {
-                "href": "/api/v1/customers/9"
+                "href": "/api/v1/users/9"
             }
         }
     }, ...
@@ -373,7 +373,7 @@
                         GET
                     </td>
                     <td class="p-2 bg-secondary text-light">
-                        <strong>/api/v1/customers/{id}</strong>
+                        <strong>/api/v1/users/{id}</strong>
                     </td>
                 </tr>
             </table>
@@ -383,7 +383,7 @@
             <table class="table table-bordered mb-3">
                 <tr>
                    <td colspan="2">
-                        <strong>Description</strong> : See one of your clients in detail
+                        <strong>Description</strong> : See one of your users in detail
                     </td>
                 </tr>
 
@@ -395,7 +395,7 @@
 
                 <tr>
                     <td colspan="2">
-                        Replace <span class="text-danger">{id}</span> with your customer's id number
+                        Replace <span class="text-danger">{id}</span> with your user's id number
                     </td>
                 </tr>
 
@@ -428,7 +428,7 @@
     "creationDate": "2023-01-03T17:17:31+00:00",
     "_links": {
         "self": {
-            "href": "/api/v1/customers/9"
+            "href": "/api/v1/users/9"
         }
     }
 }
@@ -447,7 +447,7 @@
                         POST
                     </td>
                     <td class="p-2 bg-secondary text-light">
-                        <strong>/api/v1/customers</strong>
+                        <strong>/api/v1/users</strong>
                     </td>
                 </tr>
             </table>
@@ -457,7 +457,7 @@
             <table class="table table-bordered mb-3">
                 <tr>
                     <td colspan="2">
-                        <strong>Description</strong> : Add a new customer
+                        <strong>Description</strong> : Add a new user
                     </td>
                 </tr>
 
@@ -508,7 +508,7 @@
         "creationDate": "2023-01-03T17:17:10+00:00",
         "_links": {
             "self": {
-                "href": "/api/v1/customers/7"
+                "href": "/api/v1/users/7"
             }
         }
 }
@@ -527,7 +527,7 @@
                         DELETE
                     </td>
                     <td class="p-2 bg-secondary text-light">
-                        <strong>/api/v1/customers/{id}</strong>
+                        <strong>/api/v1/users/{id}</strong>
                     </td>
                 </tr>
             </table>
@@ -537,7 +537,7 @@
             <table class="table table-bordered mb-3">
                 <tr>
                     <td colspan="2">
-                        <strong>Description</strong> : Delete one of your customers
+                        <strong>Description</strong> : Delete one of your users
                     </td>
                 </tr>
 
@@ -549,7 +549,7 @@
 
                 <tr>
                     <td colspan="2">
-                        Replace <span class="text-danger">{id}</span> with your customer's id number
+                        Replace <span class="text-danger">{id}</span> with your user's id number
                     </td>
                 </tr>
 
@@ -570,11 +570,10 @@
 
                 <tr>
                     <td>
-                        200 (OK)
+                        204 (NO CONTENT)
                     </td>
                     <td>
                         <pre>
-Customer successfully deleted
                         </pre>
                     </td>
                 </tr>     

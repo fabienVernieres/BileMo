@@ -21,7 +21,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 #[Route('/api', name: 'api_')]
-class CustomerController extends AbstractController
+class UserController extends AbstractController
 {
     private JWTTokenManagerInterface $jwtManager;
     private TokenStorageInterface $tokenStorageInterface;
@@ -54,13 +54,13 @@ class CustomerController extends AbstractController
         // The cache
         $this->cache = $cache;
 
-        $this->context = SerializationContext::create()->setGroups(['customers']);
+        $this->context = SerializationContext::create()->setGroups(['users']);
         $this->serializer = $serializer;
         $this->customerRepository = $customerRepository;
         $this->pagination = $pagination;
     }
 
-    #[Route('/v1/customers', name: 'customer_new', methods: ['POST'])]
+    #[Route('/v1/users', name: 'user_new', methods: ['POST'])]
     /**
      * Add a customer
      *
@@ -84,16 +84,13 @@ class CustomerController extends AbstractController
         $entityManager->persist($customer);
         $entityManager->flush();
 
-        // Delete the cache
-        $this->cache->delete('customers_' . $this->user->getId());
-
         // Return created response with the object
         $customer = $this->serializer->serialize($customer, 'json', $this->context);
         return new JsonResponse($customer, 201, [], true);
     }
 
 
-    #[Route('/v1/customers/{id}', name: 'customer_delete', methods: ['DELETE'])]
+    #[Route('/v1/users/{id}', name: 'user_delete', methods: ['DELETE'])]
     /**
      * Delete a customer
      *
@@ -110,15 +107,14 @@ class CustomerController extends AbstractController
         }
 
         // Delete the cache
-        $this->cache->delete('customer_' . $id->getId());
-        $this->cache->delete('customers_' . $this->user->getId());
+        $this->cache->delete('user_' . $id->getId());
 
         // Return no content response
         return new JsonResponse(null, 204, [], false);
     }
 
 
-    #[Route('/v1/customers', name: 'customers', methods: ['GET'])]
+    #[Route('/v1/users', name: 'users', methods: ['GET'])]
     /**
      * Get all of the user's clients
      *
@@ -133,11 +129,11 @@ class CustomerController extends AbstractController
 
         // Cache the request
         $customers = $this->cache->get(
-            'customers_' . $this->user->getId() . '_' . $currentPage,
+            'users_' . $this->user->getId() . '_' . $currentPage,
             function (ItemInterface $item) use ($currentPage, $customersPerPage) {
-                $item->expiresAfter(3600);
+                $item->expiresAfter(60);
                 $customers = $this->customerRepository->findAllWithPagination($currentPage, $customersPerPage, $this->user);
-                $pagination = $this->pagination->pagination('customers', $customersPerPage, $this->customerRepository->count(['user' => $this->user]));
+                $pagination = $this->pagination->pagination('users', $customersPerPage, $this->customerRepository->count(['user' => $this->user]));
                 $customersWithPagination = array_merge($customers, $pagination);
 
                 return $this->serializer->serialize($customersWithPagination, 'json', $this->context);
@@ -148,7 +144,7 @@ class CustomerController extends AbstractController
         return new JsonResponse($customers, 200, [], true);
     }
 
-    #[Route('/v1/customers/{id}', name: 'customer', methods: ['GET'])]
+    #[Route('/v1/users/{id}', name: 'user', methods: ['GET'])]
     /**
      * Get user client by id
      *
@@ -158,7 +154,7 @@ class CustomerController extends AbstractController
     public function getOne(int $id): JsonResponse
     {
         // Cache the request
-        $customer = $this->cache->get('customer_' . $id, function (ItemInterface $item) use ($id) {
+        $customer = $this->cache->get('user_' . $id, function (ItemInterface $item) use ($id) {
             $item->expiresAfter(3600);
             return $this->serializer->serialize($this->customerRepository->findOneBy([
                 'id' => $id,
