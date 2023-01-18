@@ -27,7 +27,7 @@ class Product
     #[ORM\GeneratedValue]
     #[ORM\Column]
     /**
-     * @Groups({"products"}) 
+     * @Groups({"products"})
      */
     private ?int $id = null;
 

@@ -19,8 +19,9 @@ class PaginationService
         $page = 0;
         while ($page < ($total / $limit)) {
             $page++;
-            $pagination[$page] = ['page ' . $page => '/api/v1/' . $type . '?page=' . $page];
+            $this->pagination[$page] = ['page ' . $page => '/api/v1/' . $type . '?page=' . $page];
         }
-        return $pagination;
+
+        return $this->pagination;
     }
 }
